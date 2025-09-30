@@ -44,6 +44,19 @@ kiến trúc triển khai GitLab trên Amazon EKS
 | **Redis**        | Cache & Queues               | StatefulSet hoặc ElastiCache | EBS gp3 (50Gi+)   |
 | **ALB Ingress**  | Quản lý traffic HTTP/HTTPS   | Ingress Controller        | Không cần storage        |
 
+
+## 🔧 Các loại Job chính
+
+| Loại Job                  | Ví dụ cụ thể                          | Mô tả                              |
+|---------------------------|---------------------------------------|------------------------------------|
+| **Email Notifications**   | Gửi email thông báo Merge Request     | Gửi thông báo qua SMTP/SendGrid    |
+| **CI/CD Pipelines**       | Chạy job build/test/deploy            | Xử lý các bước trong pipeline      |
+| **Repository Management** | Xử lý Git hooks                       | Đồng bộ repository mirrors         |
+| **System Maintenance**    | Dọn dẹp log, backup database          | Tự động xóa data cũ theo lịch      |
+| **Webhooks & Integrations**| Gửi request tới Slack/Jira           | Kích hoạt integration khi có event |
+| **User Activities**       | Update user activity analytics        | Thống kê hoạt động người dùng      |
+
+
 ## 🧩 Giải thích chi tiết
 
 ### **Webservice & Sidekiq**
