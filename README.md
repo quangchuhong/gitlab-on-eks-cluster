@@ -44,17 +44,32 @@ kiến trúc triển khai GitLab trên Amazon EKS
 | **Redis**        | Cache & Queues               | StatefulSet hoặc ElastiCache | EBS gp3 (50Gi+)   |
 | **ALB Ingress**  | Quản lý traffic HTTP/HTTPS   | Ingress Controller        | Không cần storage        |
 
-#Giải thích chi tiết:
-Webservice & Sidekiq  
+## 🧩 Giải thích chi tiết
 
-Loại Kubernetes: Dùng Deployment vì không yêu cầu lưu trữ liên tục
-Storage: Không cần persistent volume (dữ liệu lưu trong memory)
-Gitaly/PostgreSQL/Redis  
+### **Webservice & Sidekiq**
+- **Loại Kubernetes**:  
+  `Deployment`  
+  *→ Sử dụng Deployment vì không yêu cầu lưu trữ dữ liệu liên tục giữa các lần khởi động lại*
 
-Loại Kubernetes: Dùng StatefulSet để đảm bảo duy trì network identity và persistent storage
-Storage: Dùng EBS gp3 với kích thước tối thiểu được khuyến nghị
-ALB Ingress  
+- **Storage**:  
+  Không cần Persistent Volume  
+  *→ Dữ liệu được lưu tạm thời trong memory hoặc volume ephemeral*
 
-Chức năng: Định tuyến traffic từ Internet vào các service trong cluster
-Cấu hình: Qua annotations trong Helm values.yaml
+---
+
+### **Gitaly/PostgreSQL/Redis**
+- **Loại Kubernetes**:  
+  `StatefulSet`  
+  *→ Đảm bảo duy trì ổn định:*  
+  - Network identity (hostname cố định)  
+  - Thứ tự triển khai nghiêm ngặt  
+  - Persistent Storage
+
+- **Storage**:  
+  ```yaml
+  storageClass: "gp3"
+  size: "500Gi" # Gitaly
+  size: "100Gi"  # PostgreSQL
+  size: "50Gi"   # Redis
+
 
