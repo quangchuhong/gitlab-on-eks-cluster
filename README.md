@@ -37,10 +37,10 @@ kiến trúc triển khai GitLab trên Amazon EKS
 
 | Thành phần       | Mục đích                     | Loại Kubernetes          | Storage                  |
 |------------------|------------------------------|--------------------------|--------------------------|
-| **Webservice**   | Giao diện và API của GitLab   | Deployment               | Không lưu trữ (Ephemeral) |
-| **Sidekiq**      | Xử lý công việc nền          | Deployment               | Không lưu trữ (Ephemeral) |
+| **Webservice**   | GitLab UI & API              | Deployment               | Không lưu trữ (Ephemeral) |
+| **Sidekiq**      | Xử lý background jobs        | Deployment               | Không lưu trữ (Ephemeral) |
 | **Gitaly**       | Quản lý Git repositories     | StatefulSet              | EBS gp3 (500Gi+)          |
-| **PostgreSQL**   | Cơ sở dữ liệu chính          | StatefulSet hoặc RDS     | EBS gp3 (100Gi+)          |
-| **Redis**        | Bộ nhớ đệm & Hàng đợi        | StatefulSet hoặc ElastiCache | EBS gp3 (50Gi+)   |
+| **PostgreSQL**   | Database chính               | StatefulSet hoặc RDS     | EBS gp3 (100Gi+)          |
+| **Redis**        | Cache & Queues               | StatefulSet hoặc ElastiCache | EBS gp3 (50Gi+)   |
 | **ALB Ingress**  | Quản lý traffic HTTP/HTTPS   | Ingress Controller        | Không cần storage        |
 
