@@ -1,5 +1,6 @@
 
 kiến trúc triển khai GitLab trên Amazon EKS 
+```
 +-------------------------------+
 |          AWS ALB              |
 |  (HTTPS 443, Internet-facing) |
@@ -28,3 +29,4 @@ kiến trúc triển khai GitLab trên Amazon EKS
 | | - Gitaly PV (500Gi)                          | |
 | +------------------------------------------------+ |
 +----------------------------------------------------+
+```
