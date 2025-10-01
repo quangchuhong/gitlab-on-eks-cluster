@@ -98,6 +98,7 @@ redis:
   sentinel:
     enabled: true
     quorum: 2
+```
 
 
 ## 📂 Các loại dữ liệu chính
