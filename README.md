@@ -57,5 +57,34 @@ kiến trúc triển khai GitLab trên Amazon EKS
 | **User Activities**       | Update user activity analytics        | Thống kê hoạt động người dùng      |
 
 
+## Redis Configuration for GitLab on EKS
+
+### 🔑 **Key Roles of Redis**
+| Role                  | Description                                                                 | Example Use Cases                  |
+|-----------------------|-----------------------------------------------------------------------------|------------------------------------|
+| **Cache Layer**       | Tăng tốc truy cập bằng lưu kết quả thường dùng                              | API response, HTML fragments       |
+| **Background Jobs**   | Quản lý hàng đợi công việc (Sidekiq)                                        | CI/CD pipelines, Email alerts      |
+| **Session Storage**   | Lưu phiên đăng nhập người dùng                                              | User authentication sessions       |
+| **Rate Limiting**     | Chống spam và quá tải API                                                   | Giới hạn API requests              |
+| **Real-time Features**| Hỗ trợ tính năng real-time                                                  | Live MR updates, Websocket events  |
+
+---
+
+### ⚙️ **Configuration Guide**
+
+#### **1. High Availability (Redis Sentinel)**
+```yaml
+# values.yaml
+redis:
+  enabled: true
+  architecture: replication
+  master:
+    persistence:
+      storageClass: gp3
+      size: 50Gi
+  sentinel:
+    enabled: true
+    quorum: 2
+
 
 
