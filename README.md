@@ -100,4 +100,33 @@ redis:
     quorum: 2
 
 
+## 📂 Các loại dữ liệu chính
+
+Dưới đây là các loại dữ liệu chính được lưu trữ trong **PostgreSQL** của GitLab:
+
+| Loại dữ liệu               | Ví dụ cụ thể                                                                 |
+|----------------------------|-----------------------------------------------------------------------------|
+| **User Data**              | Thông tin người dùng (username, email, password hash, SSH keys)             |
+| **Project Metadata**       | Tên repo, mô tả, visibility (public/private), cài đặt project               |
+| **Issues & Merge Requests**| Tiêu đề, mô tả, comments, labels, assignees, trạng thái MR                  |
+| **CI/CD Configurations**   | File `.gitlab-ci.yml`, pipeline schedules, variables                        |
+| **Permissions & Roles**    | Nhóm (groups), thành viên, quyền truy cập (owner/developer/guest)          |
+| **Webhooks & Integrations**| Cấu hình webhook (URL, events), tích hợp Jira, Slack                        |
+| **Audit Logs**             | Lịch sử hoạt động (đăng nhập, thay đổi cài đặt, xóa project)              |
+| **System Settings**        | Cấu hình GitLab instance (URL, email server, rate limits)                  |
+
+---
+
+### 🔍 Giải thích ngắn gọn:
+- **PostgreSQL** đóng vai trò là **database chính** của GitLab, lưu trữ mọi metadata và cấu hình hệ thống.
+- Dữ liệu Git repository thực tế **KHÔNG** lưu tại đây mà được lưu trữ riêng trong thư mục `/var/opt/gitlab/git-data` hoặc Object Storage.
+- Định dạng bảng này phù hợp để làm tài liệu tham khảo nhanh khi debug hoặc tối ưu hệ thống.
+
+---
+
+📌 **Lưu ý quan trọng**:  
+- **Password** được lưu dưới dạng hash (bcrypt)  
+- **SSH keys** được mã hóa trước khi lưu vào database  
+- **Audit logs** nên được rotate định kỳ để tránh tốn dung lượng
+
 
