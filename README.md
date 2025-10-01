@@ -68,6 +68,19 @@ kiến trúc triển khai GitLab trên Amazon EKS
 | **Rate Limiting**     | Chống spam và quá tải API                                                   | Giới hạn API requests              |
 | **Real-time Features**| Hỗ trợ tính năng real-time                                                  | Live MR updates, Websocket events  |
 
+## Background Jobs Queue
+
+**Công cụ**: Sidekiq (dựa trên Redis)  
+
+### Loại job điển hình:
+
+| Loại Job       | Ví dụ                   | Mô tả                              |
+|----------------|-------------------------|------------------------------------|
+| **CI/CD**      | Chạy pipeline, build logs | Xử lý các job CI/CD song song, CI Job logs streaming     |
+| **Email**      | Gửi thông báo Merge Request | Gửi email qua SMTP                |
+| **Repository** | Mirror repositories     | Đồng bộ Git repositories từ remote |
+| **System**     | Cleanup logs, backups   | Dọn dẹp hệ thống định kỳ            |
+
 ---
 
 ### ⚙️ **Configuration Guide**
