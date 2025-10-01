@@ -57,32 +57,5 @@ kiến trúc triển khai GitLab trên Amazon EKS
 | **User Activities**       | Update user activity analytics        | Thống kê hoạt động người dùng      |
 
 
-## 🧩 Giải thích chi tiết
-
-### **Webservice & Sidekiq**
-- **Loại Kubernetes**:  
-  `Deployment`  
-  *→ Sử dụng Deployment vì không yêu cầu lưu trữ dữ liệu liên tục giữa các lần khởi động lại*
-
-- **Storage**:  
-  Không cần Persistent Volume  
-  *→ Dữ liệu được lưu tạm thời trong memory hoặc volume ephemeral*
-
----
-
-### **Gitaly/PostgreSQL/Redis**
-- **Loại Kubernetes**:  
-  `StatefulSet`  
-  *→ Đảm bảo duy trì ổn định:*  
-  - Network identity (hostname cố định)  
-  - Thứ tự triển khai nghiêm ngặt  
-  - Persistent Storage
-
-- **Storage**:  
-  ```yaml
-  storageClass: "gp3"
-  size: "500Gi" # Gitaly
-  size: "100Gi"  # PostgreSQL
-  size: "50Gi"   # Redis
 
 
