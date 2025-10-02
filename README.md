@@ -12,10 +12,9 @@
 ├── PostgreSQL (Database)
 ├── Redis (Cache/Queues)
 └── CI/CD Runners (Auto-scaling)
-
+```
 
 kiến trúc triển khai GitLab trên Amazon EKS 
-```
 +-------------------------------+
 |          AWS ALB              |
 |  (HTTPS 443, Internet-facing) |
