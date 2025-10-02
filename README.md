@@ -2,8 +2,6 @@
 
 ## Architecture
 
-## 🏗 Architecture Overview
-
 ```text
 [EKS Cluster]
 ├── GitLab Webservice (UI/API)
@@ -12,7 +10,6 @@
 ├── PostgreSQL (Database)
 ├── Redis (Cache/Queues)
 └── CI/CD Runners (Auto-scaling)
-```
 
 kiến trúc triển khai GitLab trên Amazon EKS 
 +-------------------------------+
