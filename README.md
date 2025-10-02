@@ -2,6 +2,18 @@
 
 ## Architecture
 
+## 🏗 Architecture Overview
+
+```text
+[EKS Cluster]
+├── GitLab Webservice (UI/API)
+├── GitLab Sidekiq (Background Jobs)
+├── Gitaly (Git Repositories)
+├── PostgreSQL (Database)
+├── Redis (Cache/Queues)
+└── CI/CD Runners (Auto-scaling)
+
+
 kiến trúc triển khai GitLab trên Amazon EKS 
 ```
 +-------------------------------+
