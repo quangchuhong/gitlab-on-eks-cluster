@@ -3,6 +3,8 @@
 ## Architecture
 
 ```text
+### Overview
+
 [EKS Cluster]
 ├── GitLab Webservice (UI/API)
 ├── GitLab Sidekiq (Background Jobs)
@@ -11,7 +13,7 @@
 ├── Redis (Cache/Queues)
 └── CI/CD Runners (Auto-scaling)
 
-kiến trúc triển khai GitLab trên Amazon EKS 
+### kiến trúc triển khai GitLab trên Amazon EKS 
 +-------------------------------+
 |          AWS ALB              |
 |  (HTTPS 443, Internet-facing) |
