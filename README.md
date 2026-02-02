@@ -185,5 +185,5 @@ runners:
   Lặp lại cho group khác (devops, appops, …) với token + tags khác.
 
   ***Kết quả***: 
-    - Project trong group cloudops sẽ thấy cloudops-runner là “group runner”.
-    - Project ngoài group này không dùng được runner đó.
+      - Project trong group cloudops sẽ thấy cloudops-runner là “group runner”.
+      - Project ngoài group này không dùng được runner đó.
