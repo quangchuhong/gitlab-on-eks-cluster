@@ -140,5 +140,7 @@ Dưới đây là các loại dữ liệu chính được lưu trữ trong **Pos
 - **Password** được lưu dưới dạng hash (bcrypt)  
 - **SSH keys** được mã hóa trước khi lưu vào database  
 - **Audit logs** nên được rotate định kỳ để tránh tốn dung lượng
+---
+## 2. Gitlab runner 
 
 
