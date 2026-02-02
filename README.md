@@ -238,3 +238,23 @@ Không có cách “khai báo nhiều runner khác nhau” trong một block git
 Tức là: nhiều runner = nhiều Helm release gitlab-runner, không nhét hết vào 1 values.yaml của GitLab.
 
 Dưới đây là cách làm cụ thể.
+
+- Runner 1 – cho group CloudOps:
+`values-runner-cloudops.yaml`:
+```bash
+gitlabUrl: "http://gitlab.gitlabonlinecom.click/"
+runnerRegistrationToken: "<GROUP_TOKEN_CLOUDOPS>"
+
+runners:
+  executor: "kubernetes"
+  namespace: "gitlab"
+  tags: "cloudops,eks,k8s"
+  image: "python:3.11-slim"
+  privileged: false
+  concurrent: 10
+
+serviceAccount:
+  create: true
+  name: "gitlab-runner-cloudops"
+
+```
