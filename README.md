@@ -142,5 +142,13 @@ Dưới đây là các loại dữ liệu chính được lưu trữ trong **Pos
 - **Audit logs** nên được rotate định kỳ để tránh tốn dung lượng
 ---
 ## 2. Gitlab runner 
-
-
+  - 2.1. Các loại Runner trong GitLab:
+    - Instance-level runner (Shared runner)
+      - Áp dụng cho mọi project trong GitLab instance.
+    - Group-level runner: 
+      - Áp dụng cho tất cả project trong 1 group (và sub-group).
+    - Project-level runner (Specific runner)
+      - Áp dụng cho 1 project duy nhất.
+  - Khi job chạy, GitLab sẽ:
+    - Ưu tiên project runner, rồi đến group runner, rồi mới đến shared runner,
+    - Kết hợp với tags để chọn đúng runner.
