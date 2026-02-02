@@ -265,3 +265,57 @@ helm upgrade --install gitlab-runner-cloudops gitlab/gitlab-runner \
   -f values-runner-cloudops.yaml
 
 ```
+- Runner 2 – cho group DevOps (ví dụ cần build Maven + Docker/Kaniko):
+`values-runner-devops.yaml`:
+```bash
+gitlabUrl: "http://gitlab.gitlabonlinecom.click/"
+runnerRegistrationToken: "<GROUP_TOKEN_DEVOPS>"
+
+runners:
+  executor: "kubernetes"
+  namespace: "gitlab"
+  tags: "devops,maven17,docker-build"
+  image: "maven:3.9-eclipse-temurin-17"
+  privileged: true   # nếu còn dùng DinD; nếu chỉ dùng Kaniko thì có thể false
+  concurrent: 10
+
+serviceAccount:
+  create: true
+  name: "gitlab-runner-devops"
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/eks-gitlab-runner-devops"
+
+```
+Cài:
+```bash
+helm upgrade --install gitlab-runner-devops gitlab/gitlab-runner \
+  -n gitlab \
+  -f values-runner-devops.yaml
+
+```
+- Runner 3 – cho project đặc biệt (ví dụ maven17 riêng):
+`values-runner-maven17.yaml`:
+```bash
+gitlabUrl: "http://gitlab.gitlabonlinecom.click/"
+runnerRegistrationToken: "<PROJECT_TOKEN_MAVEN17>"
+
+runners:
+  executor: "kubernetes"
+  namespace: "gitlab"
+  tags: "maven17"
+  image: "maven:3.9-eclipse-temurin-17"
+  privileged: false
+  concurrent: 5
+
+serviceAccount:
+  create: true
+  name: "gitlab-runner-maven17"
+
+```
+Cài:
+```bash
+helm upgrade --install gitlab-runner-maven17 gitlab/gitlab-runner \
+  -n gitlab \
+  -f values-runner-maven17.yaml
+
+```
