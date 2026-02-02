@@ -192,6 +192,6 @@ runners:
 - Runner có danh sách tag: tags: "cloudops,eks,k8s".
 - Job có tags: [cloudops] hoặc tags: [cloudops, eks] → job sẽ được assign vào runner đó.
 - Nếu job không khai báo tags, mà runner lại có tags → job sẽ không chạy trên runner đó.
-Vì vậy:
+***Vì vậy***:
 - Nếu muốn project A chỉ dùng runner A → job phải gắn tag mà chỉ runner A có.
 - Nếu muốn chia loại workload → gán tag khác nhau cho job.
