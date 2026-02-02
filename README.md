@@ -319,3 +319,17 @@ helm upgrade --install gitlab-runner-maven17 gitlab/gitlab-runner \
   -f values-runner-maven17.yaml
 
 ```
+Tóm tắt:
+
+- Nhiều runner = nhiều Helm release của chart gitlab/gitlab-runner:
+  - gitlab-runner-cloudops
+  - gitlab-runner-devops
+  - gitlab-runner-maven17
+  - ...
+    
+- Mỗi release:
+  - Có runnerRegistrationToken riêng (group/project/instance).
+  - Có tags riêng để job chọn đúng runner.
+  - Có serviceAccount + IAM role riêng (nếu cần phân quyền AWS khác nhau).
+    
+Anh chỉ cần tạo thêm values-runner-*.yaml cho từng loại runner, rồi helm upgrade --install như trên.
