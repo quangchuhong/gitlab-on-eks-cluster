@@ -234,7 +234,7 @@ Không có cách “khai báo nhiều runner khác nhau” trong một block git
 
 - GitLab (chart gitlab/gitlab) là 1 release riêng.
 - Mỗi GitLab Runner là 1 release Helm riêng của chart gitlab/gitlab-runner, với values/token/tags khác nhau.
-- 
+
 Tức là: nhiều runner = nhiều Helm release gitlab-runner, không nhét hết vào 1 values.yaml của GitLab.
 
 Dưới đây là cách làm cụ thể.
