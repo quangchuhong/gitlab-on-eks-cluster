@@ -258,3 +258,10 @@ serviceAccount:
   name: "gitlab-runner-cloudops"
 
 ```
+Cài:
+```bash
+helm upgrade --install gitlab-runner-cloudops gitlab/gitlab-runner \
+  -n gitlab \
+  -f values-runner-cloudops.yaml
+
+```
