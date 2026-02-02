@@ -164,3 +164,25 @@ Dưới đây là các loại dữ liệu chính được lưu trữ trong **Pos
   - Vào từng Group → Settings → CI/CD → Runners.
     - Lấy Group registration token.
 - Cài runner với token đó:
+```bash
+gitlab-runner register \
+  --url http://gitlab.gitlabonlinecom.click/ \
+  --registration-token <GROUP_TOKEN_CLOUDOPS> \
+  --description "cloudops-runner" \
+  --executor kubernetes \
+  --tag-list "cloudops,eks,k8s"
+
+```
+Hoặc với Helm values (K8s):
+```bash
+gitlabUrl: "http://gitlab.gitlabonlinecom.click/"
+runnerRegistrationToken: "<GROUP_TOKEN_CLOUDOPS>"
+runners:
+  executor: "kubernetes"
+  tags: "cloudops,eks,k8s"
+
+```
+Lặp lại cho group khác (devops, appops, …) với token + tags khác.
+Kết quả:
+Project trong group cloudops sẽ thấy cloudops-runner là “group runner”.
+Project ngoài group này không dùng được runner đó.
