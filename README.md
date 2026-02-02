@@ -333,3 +333,33 @@ helm upgrade --install gitlab-runner-maven17 gitlab/gitlab-runner \
   - Có serviceAccount + IAM role riêng (nếu cần phân quyền AWS khác nhau).
     
 Anh chỉ cần tạo thêm values-runner-*.yaml cho từng loại runner, rồi helm upgrade --install như trên.
+
+*** Lưu ý***:
+
+Đồng thời trong một group có quá nhiều project run job trên runner, sẽ gặp các vấn đề “tắc đường” và tài nguyên:
+
+- Job bị xếp hàng (queue)  
+  - Mỗi runner có concurrent (số job chạy đồng thời).
+  - Ví dụ concurrent = 5, mà 20 job cùng lúc → 5 job chạy, 15 job chờ.
+  - Thời gian chờ có thể dài nếu mỗi job chạy lâu.
+    
+- Tài nguyên cluster bị căng (với Kubernetes executor)  
+  - Mỗi job = 1 pod → nhiều project cùng chạy → nhiều pod.
+  - Nếu node EKS không scale kịp:
+    - Pod ở trạng thái Pending do thiếu CPU/RAM.
+    - Job bắt đầu muộn hoặc timeout.
+      
+- Runner bị “chiếm dụng” bởi project nhiều job  
+  - Nếu 1 project spam nhiều pipeline, nó có thể chiếm gần hết concurrent của runner.
+  - Các project khác trong cùng group sẽ phải chờ nhiều hơn.
+    
+- Thời gian feedback lâu, khó debug  
+  - Dev push code → pipeline mất lâu mới start → trải nghiệm tệ, chậm feedback.
+
+Để tránh:
+
+  - Tăng số runner / tăng concurrent (và đảm bảo EKS autoscale tốt).
+  - Tách runner theo workload/nhóm quan trọng:
+    - Ví dụ: 1 runner chỉ cho “prod” hoặc project quan trọng; runner khác cho “learning/testing”.
+  - Dùng resource requests/limits hợp lý trong runner config để pod không “ăn hết” node.
+
