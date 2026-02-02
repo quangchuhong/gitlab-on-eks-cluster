@@ -197,3 +197,34 @@ runners:
 
 - Nếu muốn project A chỉ dùng runner A → job phải gắn tag mà chỉ runner A có.
 - Nếu muốn chia loại workload → gán tag khác nhau cho job.
+  
+YAML ví dụ trong project DevOps:
+```bash
+stages:
+  - build
+  - test
+  - docker
+  - scan
+
+# Job build/test Java dùng runner group DevOps
+maven-build:
+  stage: build
+  tags: [devops]
+  image: maven:3.9-eclipse-temurin-17
+  script: ...
+
+# Job docker build dùng runner docker-build
+docker-build:
+  stage: docker
+  tags: [docker-build]
+  image: gcr.io/kaniko-project/executor:v1.23.0
+  script: ...
+
+# Job scan dùng runner security
+trivy-scan:
+  stage: scan
+  tags: [security]
+  image: aquasec/trivy:0.55.0
+  script: ...
+
+```
