@@ -152,3 +152,15 @@ Dưới đây là các loại dữ liệu chính được lưu trữ trong **Pos
 - Khi job chạy, GitLab sẽ:
     - Ưu tiên project runner, rồi đến group runner, rồi mới đến shared runner,
     - Kết hợp với tags để chọn đúng runner.
+      
+#### 2.2. Chiến lược phân tách nhiều runner
+- Tách theo group/phòng ban
+Ví dụ:
+Group: cloudops → runner riêng
+Group: devops → runner riêng
+Group: appops → runner riêng
+
+- Cách làm:
+  - Vào từng Group → Settings → CI/CD → Runners.
+    - Lấy Group registration token.
+- Cài runner với token đó:
