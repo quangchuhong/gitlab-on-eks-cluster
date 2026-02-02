@@ -187,3 +187,11 @@ runners:
 ***Kết quả***:
 - Project trong group `cloudops` sẽ thấy `cloudops-runner` là “group runner”.
 - Project ngoài group này không dùng được runner đó.
+---
+#### 2.3. Nguyên tắc chọn runner bằng tags
+- Runner có danh sách tag: tags: "cloudops,eks,k8s".
+- Job có tags: [cloudops] hoặc tags: [cloudops, eks] → job sẽ được assign vào runner đó.
+- Nếu job không khai báo tags, mà runner lại có tags → job sẽ không chạy trên runner đó.
+Vì vậy:
+- Nếu muốn project A chỉ dùng runner A → job phải gắn tag mà chỉ runner A có.
+- Nếu muốn chia loại workload → gán tag khác nhau cho job.
