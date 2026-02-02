@@ -319,7 +319,7 @@ helm upgrade --install gitlab-runner-maven17 gitlab/gitlab-runner \
   -f values-runner-maven17.yaml
 
 ```
-Tóm tắt:
+***Tóm tắt***:
 
 - Nhiều runner = nhiều Helm release của chart gitlab/gitlab-runner:
   - gitlab-runner-cloudops
