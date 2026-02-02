@@ -334,7 +334,8 @@ helm upgrade --install gitlab-runner-maven17 gitlab/gitlab-runner \
     
 Anh chỉ cần tạo thêm values-runner-*.yaml cho từng loại runner, rồi helm upgrade --install như trên.
 
-*** Lưu ý***:
+
+***Lưu ý***:
 
 Đồng thời trong một group có quá nhiều project run job trên runner, sẽ gặp các vấn đề “tắc đường” và tài nguyên:
 
